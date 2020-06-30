@@ -1,7 +1,9 @@
+from selenium.webdriver.common.by import By
+
 class PageItems():
     def __init__(self, my_driver):
-        self.orange_item = 'color_1'
+        self.orange_item = (By.ID, 'color_1')
         self.driver = my_driver
 
     def click_orange_b(self):
-        self.driver.find_element_by_id(self.orange_item).click()
+        self.driver.find_element(*self.orange_item).click()
