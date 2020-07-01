@@ -9,14 +9,11 @@ class PageIndex():
         self.driver = my_driver
 
     def search(self, item):
-        #Necesito un web element "search_box"
-        #para que aparezca tengo que esperar (tiene un tiempo máximo de 10 seg) una condición (until),
-        #que espere hasta que el elemento "query_top" exista.
-        search_box = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(self.query_top))
-        search_box.send_keys(item)
+        try:
+            search_box = WebDriverWait(self.driver, 10).until(EC.presence_of_element_located(self.query_top))
+            search_box.send_keys(item)
 
-        # Necesito un web element "search_button"
-        # para que aparezca tengo que esperar (tiene un tiempo máximo de 10 seg) una condición (until),
-        # que espere hasta que el elemento "query_button" sea clickeable.
-        search_button = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.query_button))
-        search_button.click()
+            search_button = WebDriverWait(self.driver, 10).until(EC.element_to_be_clickable(self.query_button))
+            search_button.click()
+        except:
+            print("No se encuentra el elemento")

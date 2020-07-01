@@ -3,6 +3,7 @@ from selenium import webdriver
 from pageindex import PageIndex
 from pageitems import PageItems
 from page_product import PageProduct
+import time
 
 class ClothesCart (unittest.TestCase):
 
@@ -14,6 +15,7 @@ class ClothesCart (unittest.TestCase):
         self.itemsPage = PageItems(self.driver)
         self.productPage = PageProduct(self.driver)
 
+    @unittest.skip("Not need now")
     def test_addQuantity(self):
         self.indexPage.search('t-shirt')
         self.itemsPage.click_orange_b()
@@ -21,6 +23,11 @@ class ClothesCart (unittest.TestCase):
         self.productPage.add_quantity(3)
         self.assertEqual(self.productPage.return_quantity(), '28')
 
+    def test_selections(self):
+        self.indexPage.search('t-shirt')
+        time.sleep(5)
+        self.itemsPage.select_by_text('Product Name: A to Z')
+        time.sleep(5)
 
     def tearDown(self):
         self.driver.close()
