@@ -25,9 +25,12 @@ class ClothesCart (unittest.TestCase):
 
     def test_selections(self):
         self.indexPage.search('t-shirt')
-        time.sleep(5)
         self.itemsPage.select_by_text('Product Name: A to Z')
-        time.sleep(5)
+        time.sleep(3)
+        self.itemsPage.select_by_value('reference:asc')
+        time.sleep(3)
+        self.itemsPage.select_by_index(2)
+        time.sleep(3)
 
     def tearDown(self):
         self.driver.close()

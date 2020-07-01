@@ -13,3 +13,11 @@ class PageItems():
     def select_by_text(self, text):
         order = Select(self.driver.find_element(*self.order))
         order.select_by_visible_text(text)
+
+    def select_by_value(self, value):
+        order = Select(self.driver.find_element(*self.order))
+        order.select_by_value(value)
+
+    def select_by_index(self, number):
+        order = Select(self.driver.find_element(*self.order))
+        order.select_by_index((number))
