@@ -4,11 +4,15 @@ from pageindex import PageIndex
 from pageitems import PageItems
 from page_product import PageProduct
 import time
+from selenium.webdriver.chrome.options import Options
 
 class ClothesCart (unittest.TestCase):
 
     def setUp(self):
-        self.driver = webdriver.Chrome('chromedriver.exe')
+        option = Options()
+        option.add_argument("start-maximized")
+        option.add_argument("incognito")
+        self.driver = webdriver.Chrome('chromedriver.exe', chrome_options = option)
         self.driver.get('http://automationpractice.com/index.php')
         self.driver.implicitly_wait(10)
         self.indexPage = PageIndex(self.driver)
@@ -26,11 +30,8 @@ class ClothesCart (unittest.TestCase):
     def test_selections(self):
         self.indexPage.search('t-shirt')
         self.itemsPage.select_by_text('Product Name: A to Z')
-        time.sleep(3)
         self.itemsPage.select_by_value('reference:asc')
-        time.sleep(3)
         self.itemsPage.select_by_index(2)
-        time.sleep(3)
 
     def tearDown(self):
         self.driver.close()
