@@ -19,7 +19,7 @@ class BuyDress (unittest.TestCase):
         self.casualDressesPage = PageCasualDresses(self.driver)
         self.dressPage = PageDress(self.driver)
 
-    def test_buy_dress(self):
+    def test_case_1_buy_dress(self):
         try:
             self.indexPage.enter_dress_section()
             self.dressesPage.enter_casual_dress_category()
@@ -33,8 +33,20 @@ class BuyDress (unittest.TestCase):
             self.assertEqual('$132.00', self.dressPage.return_total_price())
             self.assertEqual('Printed Dress', self.dressPage.return_product_name())
         except:
-            self.driver.save_screenshot("error_test_buy_dress.jpg")
+            self.driver.save_screenshot("test_case_1_buy_dress.jpg")
 
+    def test_case_2_buy_dress(self):
+        try:
+            self.indexPage.enter_dress_section()
+            self.dressesPage.select_product_sort('Price: Lowest first')
+            self.dressesPage.enter_list_view()
+            self.dressesPage.enter_add_cart_button()
+            self.assertEqual('$50.99', self.dressPage.return_total_price_product())
+            self.assertEqual('$2.00', self.dressPage.return_total_shipping())
+            self.assertEqual('$52.99', self.dressPage.return_total_price())
+            self.assertEqual('Printed Dress', self.dressPage.return_product_name())
+        except:
+            self.driver.save_screenshot("error_test_case_2_buy_dress.jpg")
 
     def tearDown(self):
         self.driver.close()
